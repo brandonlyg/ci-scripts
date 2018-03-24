@@ -23,6 +23,10 @@ eval user=\$${BRANCH}_user
 eval appsdir=\$${BRANCH}_appsdir
 eval iplist=\$${BRANCH}_iplist
 
+if [ "$BRANCH" = "publish" ]; then
+	eval iplist=\$${BRANCH}_${DEPLOY}_iplist
+fi
+
 $selfdir/create_dist.sh $appname $BRANCH dist bin/*,config/*,build/libs/*
 $selfdir/deploy.sh $appname dist $appsdir $user $iplist
 
